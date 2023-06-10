@@ -1,0 +1,27 @@
+modLoader = "javafml" #mandatory
+loaderVersion = "${loader_version}" #mandatory
+license = "Creative Commons"
+issueTrackerURL = "${git_url}/issues" #optional
+[[mods]] #mandatory
+modId = "novacore" #mandatory
+version = "${version}" #mandatory
+displayName = "NovaCore" #mandatory
+displayURL = "${curseforge_url}" #optional
+logoFile = "logo.png" #optional
+credits = "Thanks to McJty for tutorials" #optional
+authors = "NovaMachina" #optional
+description = """
+    Library mod for all NovaMachina Mods
+    """
+[[dependencies.novacore]] #optional
+modId = "forge" #mandatory
+mandatory = true #mandatory
+versionRange = "${forge_version}" #mandatory
+ordering = "NONE"
+side = "BOTH"
+[[dependencies.novacore]]
+modId = "minecraft"
+mandatory = true
+versionRange = "${mc_version}"
+ordering = "NONE"
+side = "BOTH"
