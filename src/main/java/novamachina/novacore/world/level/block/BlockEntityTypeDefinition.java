@@ -9,8 +9,7 @@ public class BlockEntityTypeDefinition<T extends BlockEntity> {
   private final ResourceLocation id;
   private final BlockEntityType<T> type;
 
-  public BlockEntityTypeDefinition(
-      ResourceLocation id, BlockEntityType<T> blockEntityType) {
+  public BlockEntityTypeDefinition(ResourceLocation id, BlockEntityType<T> blockEntityType) {
     Objects.requireNonNull(id, "id");
     this.id = id;
     this.type = blockEntityType;

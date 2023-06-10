@@ -4,8 +4,8 @@ import java.util.function.Supplier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.material.FlowingFluid;
-import novamachina.novacore.world.level.block.BlockDefinition;
 import novamachina.novacore.world.item.ItemDefinition;
+import novamachina.novacore.world.level.block.BlockDefinition;
 import novamachina.novacore.world.level.material.FluidDefinition;
 
 public class FluidRegistry extends AbstractRegistry<FluidDefinition<?, ?, ?>> {
