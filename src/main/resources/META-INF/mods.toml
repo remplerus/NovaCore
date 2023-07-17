@@ -1,27 +1,27 @@
 modLoader = "javafml" #mandatory
-loaderVersion = "${loader_version}" #mandatory
-license = "Creative Commons"
+loaderVersion = "${loader_version_range}" #mandatory
+license = "${mod_license}"
 issueTrackerURL = "${git_url}/issues" #optional
+
 [[mods]] #mandatory
-modId = "novacore" #mandatory
-version = "${version}" #mandatory
-displayName = "NovaCore" #mandatory
+modId = "${mod_id}" #mandatory
+version = "${mod_version}" #mandatory
+displayName = "${mod_name}" #mandatory
+updateJSONURL = "https://api.modrinth.com/updates/${modrinth_project_id}/forge_updates.json"
 displayURL = "${curseforge_url}" #optional
 logoFile = "logo.png" #optional
-credits = "Thanks to McJty for tutorials" #optional
-authors = "NovaMachina" #optional
-description = """
-    Library mod for all NovaMachina Mods
-    """
-[[dependencies.novacore]] #optional
+#credits = "Thanks to McJty for tutorials and those that created the Ex Nihilo series" #optional
+authors = "${mod_authors}" #optional
+description = '''${mod_description}'''
+[[dependencies.${mod_id}]] #optional
 modId = "forge" #mandatory
 mandatory = true #mandatory
-versionRange = "${forge_version}" #mandatory
+versionRange = "${forge_version_range}" #mandatory
 ordering = "NONE"
 side = "BOTH"
-[[dependencies.novacore]]
+[[dependencies.${mod_id}]]
 modId = "minecraft"
 mandatory = true
-versionRange = "${mc_version}"
+versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"

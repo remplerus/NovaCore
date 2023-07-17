@@ -2,6 +2,7 @@ package novamachina.novacore.world.item.crafting;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
@@ -13,14 +14,14 @@ import org.jetbrains.annotations.NotNull;
 public abstract class SerializableRecipe implements Recipe<Container> {
 
   @Nonnull protected final ResourceLocation id;
-  @Nullable protected final ItemStack outputDummy;
+  @Nullable protected final ItemStack result;
   @Nonnull protected final RecipeType<?> type;
 
   protected SerializableRecipe(
-      @Nullable final ItemStack outputDummy,
+      @Nullable final ItemStack result,
       @Nonnull final RecipeType<?> type,
       @Nonnull final ResourceLocation id) {
-    this.outputDummy = outputDummy;
+    this.result = result;
     this.type = type;
     this.id = id;
   }
@@ -35,9 +36,13 @@ public abstract class SerializableRecipe implements Recipe<Container> {
   }
 
   @Override
-  @Nullable
-  public ItemStack assemble(@Nonnull final Container inv) {
-    return this.outputDummy;
+  public ItemStack assemble(Container container, RegistryAccess registryAccess) {
+    return this.getResultItem(registryAccess).copy();
+  }
+
+  @Override
+  public ItemStack getResultItem(RegistryAccess registryAccess) {
+    return this.result;
   }
 
   @Override

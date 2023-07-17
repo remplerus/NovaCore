@@ -1,6 +1,5 @@
 package novamachina.novacore.world.level.block;
 
-import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.function.ToIntFunction;
 import net.minecraft.world.entity.EntityType;
@@ -11,15 +10,14 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 
 public class BlockBuilder {
 
   private BlockBehaviour.Properties properties;
 
-  public static BlockBuilder create(Material material) {
-    return new BlockBuilder(material);
+  public static BlockBuilder create() {
+    return new BlockBuilder();
   }
 
   public BlockBuilder noCollision() {
@@ -134,11 +132,6 @@ public class BlockBuilder {
     return this;
   }
 
-  public BlockBuilder color(MaterialColor materialColor) {
-    this.properties.color(materialColor);
-    return this;
-  }
-
   public BlockBuilder destroyTime(float destroyTime) {
     this.properties.destroyTime(destroyTime);
     return this;
@@ -154,8 +147,8 @@ public class BlockBuilder {
     return this;
   }
 
-  public BlockBuilder offsetType(Function<BlockState, BlockBehaviour.OffsetType> offsetType) {
-    this.properties.offsetType(offsetType);
+  public BlockBuilder mapColor(MapColor mapColor) {
+    this.properties.mapColor(mapColor);
     return this;
   }
 
@@ -171,7 +164,7 @@ public class BlockBuilder {
     return new LiquidBlock(fluid, properties);
   }
 
-  private BlockBuilder(Material material) {
-    this.properties = BlockBehaviour.Properties.of(material);
+  private BlockBuilder() {
+    this.properties = BlockBehaviour.Properties.of();
   }
 }
