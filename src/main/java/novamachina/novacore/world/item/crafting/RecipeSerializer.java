@@ -6,10 +6,10 @@ import javax.annotation.Nonnull;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 
-public abstract class NovaRecipeSerializer<R extends Recipe<?>> implements RecipeSerializer<R> {
+public abstract class RecipeSerializer<R extends Recipe<?>>
+    implements net.minecraft.world.item.crafting.RecipeSerializer<R> {
 
   @Override
   @Nonnull

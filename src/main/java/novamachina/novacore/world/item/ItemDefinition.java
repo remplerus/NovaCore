@@ -1,17 +1,18 @@
 package novamachina.novacore.world.item;
 
 import java.util.Objects;
+import lombok.Getter;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class ItemDefinition<T extends Item> implements ItemLike {
-  private final ResourceLocation id;
-  private final String englishName;
+  @Getter private final ResourceLocation id;
+  @Getter private final String englishName;
   private final T item;
-
-  private final ItemType type;
+  @Getter private final ItemType type;
 
   public ItemDefinition(String englishName, ResourceLocation id, T item, ItemType type) {
     Objects.requireNonNull(id, "id");
@@ -22,6 +23,7 @@ public class ItemDefinition<T extends Item> implements ItemLike {
   }
 
   @Override
+  @NonNull
   public T asItem() {
     return item;
   }
@@ -32,18 +34,6 @@ public class ItemDefinition<T extends Item> implements ItemLike {
 
   public ItemStack itemStack(int stacksize) {
     return new ItemStack(item, stacksize);
-  }
-
-  public ResourceLocation getId() {
-    return id;
-  }
-
-  public String getEnglishName() {
-    return englishName;
-  }
-
-  public ItemType getType() {
-    return type;
   }
 
   public enum ItemType {
