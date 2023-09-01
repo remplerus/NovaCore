@@ -1,4 +1,4 @@
-package novamachina.novacore.registries;
+package novamachina.novacore.core.registries;
 
 import java.util.function.Supplier;
 import net.minecraft.world.item.Item;
@@ -27,7 +27,7 @@ public class FluidRegistry extends AbstractRegistry<FluidDefinition<?, ?, ?>> {
     FluidDefinition<F, B, I> definition =
         new FluidDefinition<>(
             englishName, id(shortId), stillSupplier, flowSupplier, blockSupplier, bucketSupplier);
-    register(definition);
+    this.register(definition);
     return definition;
   }
 }

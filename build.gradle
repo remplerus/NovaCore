@@ -3,19 +3,7 @@ project.groupExcludes.addAll(
         'novamachina.*'
 )
 
-project.cloudSmithRepo = "https://maven.cloudsmith.io/novamachina-mods/novacore/"
-
 apply from: "https://raw.githubusercontent.com/NovaMachina-Mods/conventions/1.20/scripts/mod.gradle"
-
-repositories {
-    maven {
-        name 'NovaMachina Mods'
-        url 'https://dl.cloudsmith.io/public/novamachina-mods/ex-nihilo-sequentia/maven/'
-        content {
-            includeGroup 'novamachina.*'
-        }
-    }
-}
 
 dependencies {
 }

@@ -1,4 +1,4 @@
-package novamachina.novacore.registries;
+package novamachina.novacore.core.registries;
 
 import java.util.ArrayList;
 import java.util.List;

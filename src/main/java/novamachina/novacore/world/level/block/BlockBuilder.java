@@ -30,6 +30,16 @@ public class BlockBuilder {
     return this;
   }
 
+  public BlockBuilder replaceable() {
+    this.properties.replaceable();
+    return this;
+  }
+
+  public BlockBuilder liquid() {
+    this.properties.liquid();
+    return this;
+  }
+
   public BlockBuilder friction(float friction) {
     this.properties.friction(friction);
     return this;
@@ -161,7 +171,7 @@ public class BlockBuilder {
   }
 
   public LiquidBlock buildLiquidBlock(Supplier<? extends FlowingFluid> fluid) {
-    return new LiquidBlock(fluid, properties);
+    return new LiquidBlock(fluid, properties.liquid().replaceable());
   }
 
   private BlockBuilder() {

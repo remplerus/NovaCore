@@ -1,4 +1,4 @@
-package novamachina.novacore.registries;
+package novamachina.novacore.core.registries;
 
 import java.util.function.Supplier;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -17,7 +17,7 @@ public class RecipeSerializerRegistry
     RecipeSerializer<? extends Recipe> instance = supplier.get();
     RecipeSerializerDefinition<? extends Recipe> definition =
         new RecipeSerializerDefinition<>(id(shortId), instance);
-    register(definition);
+    this.register(definition);
     return definition;
   }
 }

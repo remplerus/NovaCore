@@ -1,6 +1,8 @@
 package novamachina.novacore.data.loot.table;
 
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.Function;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
@@ -16,6 +18,8 @@ import novamachina.novacore.world.level.block.BlockDefinition;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 public abstract class BlockLootTables extends BlockLootSubProvider {
+  private final Set<Block> knownBlocks = new HashSet<>();
+
   protected BlockLootTables() {
     super(Collections.emptySet(), FeatureFlags.VANILLA_SET);
   }
@@ -26,7 +30,13 @@ public abstract class BlockLootTables extends BlockLootSubProvider {
       BlockDefinition<? extends Block>... blockDefinitions) {
     for (BlockDefinition<? extends Block> blockDefinition : blockDefinitions) {
       add(blockDefinition.block(), factory);
+      this.knownBlocks.add(blockDefinition.block());
     }
+  }
+
+  @Override
+  protected Iterable<Block> getKnownBlocks() {
+    return knownBlocks;
   }
 
   @Override

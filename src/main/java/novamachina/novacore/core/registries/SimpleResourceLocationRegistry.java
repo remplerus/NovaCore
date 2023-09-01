@@ -1,4 +1,4 @@
-package novamachina.novacore.registries;
+package novamachina.novacore.core.registries;
 
 import net.minecraft.resources.ResourceLocation;
 
@@ -9,7 +9,7 @@ public class SimpleResourceLocationRegistry extends AbstractRegistry<ResourceLoc
 
   public ResourceLocation register(String shortId) {
     ResourceLocation statResourceLocation = id(shortId);
-    register(statResourceLocation);
+    this.register(statResourceLocation);
     return statResourceLocation;
   }
 }

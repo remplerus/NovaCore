@@ -1,4 +1,4 @@
-package novamachina.novacore.registries;
+package novamachina.novacore.core.registries;
 
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -16,7 +16,7 @@ public class RecipeTypeRegistry extends AbstractRegistry<RecipeType<? extends Re
             return id(shortId).toString();
           }
         };
-    register(type);
+    this.register(type);
     return type;
   }
 }

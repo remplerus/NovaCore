@@ -1,4 +1,4 @@
-package novamachina.novacore.registries;
+package novamachina.novacore.core.registries;
 
 import java.util.function.Supplier;
 import javax.annotation.Nonnull;
@@ -41,7 +41,7 @@ public class BlockRegistry extends AbstractRegistry<BlockDefinition<? extends Bl
   private <T extends Block> BlockDefinition<T> blockDefinition(
       String englishName, ResourceLocation id, T block, BlockItem item) {
     BlockDefinition<T> definition = new BlockDefinition<>(englishName, id, block, item);
-    register(definition);
+    this.register(definition);
     return definition;
   }
 }

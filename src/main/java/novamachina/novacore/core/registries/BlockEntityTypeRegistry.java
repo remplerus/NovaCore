@@ -1,4 +1,4 @@
-package novamachina.novacore.registries;
+package novamachina.novacore.core.registries;
 
 import com.google.common.base.Preconditions;
 import java.util.Arrays;
@@ -36,7 +36,7 @@ public class BlockEntityTypeRegistry
 
     BlockEntityTypeDefinition<T> definition = new BlockEntityTypeDefinition<>(id, type);
 
-    register(definition);
+    this.register(definition);
 
     return definition;
   }

@@ -1,4 +1,4 @@
-package novamachina.novacore.registries;
+package novamachina.novacore.core.registries;
 
 import java.util.function.Supplier;
 import net.minecraft.world.item.Item;
@@ -14,7 +14,7 @@ public class ItemRegistry extends AbstractRegistry<ItemDefinition<? extends Item
     T item = itemSupplier.get();
     ItemDefinition<T> definition = new ItemDefinition<>(englishName, id(shortId), item, type);
 
-    register(definition);
+    this.register(definition);
     return definition;
   }
 }
