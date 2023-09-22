@@ -1,0 +1,10 @@
+.gradle
+.idea
+build
+lib
+run
+runserver
+**/.cache
+bin
+changelog.html
+changelog.md

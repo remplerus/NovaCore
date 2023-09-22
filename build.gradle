@@ -1,0 +1,9 @@
+apply from: "https://raw.githubusercontent.com/NovaMachina-Mods/conventions/1.20/scripts/init.gradle"
+project.groupExcludes.addAll(
+        'novamachina.*'
+)
+
+apply from: "https://raw.githubusercontent.com/NovaMachina-Mods/conventions/1.20/scripts/mod.gradle"
+
+dependencies {
+}
