@@ -3,7 +3,7 @@ package novamachina.novacore.util;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.material.Fluids;
@@ -25,8 +25,8 @@ public class TankUtil {
     }
 
     if (player.getMainHandItem().getItem() == Items.POTION
-        && WATER_BOTTLE.getTag() != null
-        && WATER_BOTTLE.getTag().equals(player.getMainHandItem().getTag())) {
+        && WATER_BOTTLE.getTags().findAny().isPresent()
+        && WATER_BOTTLE.getTags().anyMatch(player.getMainHandItem().getTags().toList()::contains)) {
       FluidStack water = new FluidStack(Fluids.WATER, waterAmount);
       if (tank.fill(water, FluidAction.SIMULATE) == water.getAmount()
           && player.addItem(new ItemStack(Items.GLASS_BOTTLE))) {
@@ -68,6 +68,6 @@ public class TankUtil {
   }
 
   static {
-    WATER_BOTTLE = PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER);
+    WATER_BOTTLE = PotionContents.createItemStack(Items.POTION, Potions.WATER);
   }
 }

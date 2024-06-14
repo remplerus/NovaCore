@@ -1,6 +1,6 @@
 package novamachina.novacore.core.registries;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
 import net.neoforged.neoforge.common.loot.LootModifier;
@@ -15,7 +15,7 @@ public class LootModifierRegistry
   public <T extends LootModifier> LootModifierDefinition<T> create(
       String shortId,
       LootItemCondition[] conditions,
-      Codec<? extends IGlobalLootModifier> codec,
+      MapCodec<? extends IGlobalLootModifier> codec,
       LootModifierDefinition.Factory<T> factory) {
     LootModifierDefinition<T> definition =
         new LootModifierDefinition<>(id(shortId), conditions, codec, factory);

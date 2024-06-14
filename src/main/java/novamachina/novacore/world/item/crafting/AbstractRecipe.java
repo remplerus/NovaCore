@@ -1,5 +1,6 @@
 package novamachina.novacore.world.item.crafting;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
@@ -9,15 +10,13 @@ import net.minecraft.world.level.Level;
 
 public abstract class AbstractRecipe implements Recipe<Container> {
 
-  public abstract void write(FriendlyByteBuf buffer);
-
   @Override
   public boolean matches(Container pContainer, Level pLevel) {
     return false;
   }
 
   @Override
-  public ItemStack assemble(Container pContainer, RegistryAccess pRegistryAccess) {
+  public ItemStack assemble(Container pContainer, HolderLookup.Provider provider) {
     return ItemStack.EMPTY;
   }
 
@@ -27,7 +26,7 @@ public abstract class AbstractRecipe implements Recipe<Container> {
   }
 
   @Override
-  public ItemStack getResultItem(RegistryAccess pRegistryAccess) {
+  public ItemStack getResultItem(HolderLookup.Provider provider) {
     return ItemStack.EMPTY;
   }
 }

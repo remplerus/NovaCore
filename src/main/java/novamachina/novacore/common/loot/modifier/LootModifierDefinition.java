@@ -1,6 +1,6 @@
 package novamachina.novacore.common.loot.modifier;
 
-import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.loot.IGlobalLootModifier;
@@ -9,13 +9,13 @@ import net.neoforged.neoforge.common.loot.LootModifier;
 public class LootModifierDefinition<T extends LootModifier> {
   private final ResourceLocation id;
   private final LootItemCondition[] conditions;
-  private final Codec<? extends IGlobalLootModifier> codec;
+  private final MapCodec<? extends IGlobalLootModifier> codec;
   private final Factory<T> factory;
 
   public LootModifierDefinition(
       ResourceLocation id,
       LootItemCondition[] conditions,
-      Codec<? extends IGlobalLootModifier> codec,
+      MapCodec<? extends IGlobalLootModifier> codec,
       Factory<T> factory) {
     this.id = id;
     this.conditions = conditions;
@@ -35,7 +35,7 @@ public class LootModifierDefinition<T extends LootModifier> {
     return this.conditions;
   }
 
-  public Codec<? extends IGlobalLootModifier> getCodec() {
+  public MapCodec<? extends IGlobalLootModifier> getCodec() {
     return this.codec;
   }
 

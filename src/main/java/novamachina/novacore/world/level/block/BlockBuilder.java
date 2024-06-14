@@ -173,7 +173,7 @@ public class BlockBuilder {
   }
 
   public LiquidBlock buildLiquidBlock(Supplier<? extends FlowingFluid> fluid) {
-    return new LiquidBlock(fluid, properties.liquid().replaceable());
+    return new LiquidBlock(fluid.get(), properties.liquid().replaceable());
   }
 
   private BlockBuilder() {
