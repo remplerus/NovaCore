@@ -17,7 +17,7 @@ if (project.file('../gradletools.gradle').exists()) {
 
 def basicVersion = "${project.mod_version}-build." + ext.getBuildNumber()
 version = "${project.minecraft_version}-${basicVersion}" + (basicVersion.endsWith("SNAPSHOT") ?  '' : (project.release_type != 'release' ? "-${project.release_type}" : ''))
-group = project.mod_group_id + project.mod_id
+group = String.format("%s.%s",project.mod_group_id, project.mod_id)
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
