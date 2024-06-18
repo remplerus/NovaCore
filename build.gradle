@@ -53,3 +53,11 @@ project.tasks.withType(JavaCompile).configureEach {
 }
 
 ideaConfig()
+
+sonar {
+    properties {
+        property "sonar.projectKey", "NovaMachina-Mods_NovaCore"
+        property "sonar.organization", "novamachina-mods"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
+}
