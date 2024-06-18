@@ -1,20 +1,20 @@
 package novamachina.novacore.world.item.crafting;
 
 import net.minecraft.core.HolderLookup;
-import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeInput;
 import net.minecraft.world.level.Level;
 
-public abstract class AbstractRecipe implements Recipe<Container> {
+public abstract class AbstractRecipe implements Recipe<RecipeInput> {
 
   @Override
-  public boolean matches(Container pContainer, Level pLevel) {
+  public boolean matches(RecipeInput pContainer, Level pLevel) {
     return false;
   }
 
   @Override
-  public ItemStack assemble(Container pContainer, HolderLookup.Provider provider) {
+  public ItemStack assemble(RecipeInput pContainer, HolderLookup.Provider provider) {
     return ItemStack.EMPTY;
   }
 

@@ -13,7 +13,7 @@ public abstract class AbstractRegistry<T> {
   }
 
   protected ResourceLocation id(String name) {
-    return new ResourceLocation(this.modId, name);
+    return ResourceLocation.fromNamespaceAndPath(this.modId, name);
   }
 
   protected void register(T registryObject) {

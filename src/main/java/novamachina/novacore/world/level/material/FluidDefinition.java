@@ -71,7 +71,7 @@ public class FluidDefinition<
   }
 
   public ResourceLocation getFlowingId() {
-    return new ResourceLocation(
+    return ResourceLocation.fromNamespaceAndPath(
         this.id.getNamespace(), String.format("%s_flow", this.id.getPath()));
   }
 
@@ -80,12 +80,12 @@ public class FluidDefinition<
   }
 
   public ResourceLocation getTexture() {
-    return new ResourceLocation(
+    return ResourceLocation.fromNamespaceAndPath(
         this.id.getNamespace(), String.format("block/%s", this.id.getPath()));
   }
 
   public ResourceLocation getFlowTexture() {
-    return new ResourceLocation(
+    return ResourceLocation.fromNamespaceAndPath(
         this.id.getNamespace(), String.format("block/%s_flow", this.id.getPath()));
   }
 

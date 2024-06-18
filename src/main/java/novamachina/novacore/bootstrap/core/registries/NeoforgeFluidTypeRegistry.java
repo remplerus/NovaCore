@@ -1,4 +1,4 @@
-package novamachina.novacore.bootstrap;
+package novamachina.novacore.bootstrap.core.registries;
 
 import net.minecraft.core.Registry;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;

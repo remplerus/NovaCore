@@ -1,4 +1,4 @@
-package novamachina.novacore.world.level.block;
+package novamachina.novacore.world.level.block.entity;
 
 import java.util.Objects;
 import net.minecraft.resources.ResourceLocation;

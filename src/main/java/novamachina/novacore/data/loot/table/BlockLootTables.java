@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Function;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.ItemLike;
@@ -19,8 +20,8 @@ import novamachina.novacore.world.level.block.BlockDefinition;
 public abstract class BlockLootTables extends BlockLootSubProvider {
   private final Set<Block> knownBlocks = new HashSet<>();
 
-  protected BlockLootTables() {
-    super(Collections.emptySet(), FeatureFlags.VANILLA_SET);
+  protected BlockLootTables(HolderLookup.Provider provider) {
+    super(Collections.emptySet(), FeatureFlags.VANILLA_SET, provider);
   }
 
   @SafeVarargs

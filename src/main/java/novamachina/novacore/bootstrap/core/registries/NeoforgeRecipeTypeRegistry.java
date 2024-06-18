@@ -1,4 +1,4 @@
-package novamachina.novacore.bootstrap;
+package novamachina.novacore.bootstrap.core.registries;
 
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -9,6 +9,7 @@ import novamachina.novacore.core.IRegistry;
 public class NeoforgeRecipeTypeRegistry implements IRegistry<RecipeType<?>> {
   @Override
   public void register(RecipeType<?> entry) {
-    Registry.register(BuiltInRegistries.RECIPE_TYPE, new ResourceLocation(entry.toString()), entry);
+    Registry.register(
+        BuiltInRegistries.RECIPE_TYPE, ResourceLocation.parse(entry.toString()), entry);
   }
 }

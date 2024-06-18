@@ -9,13 +9,18 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import novamachina.novacore.core.IServiceProvider;
 import novamachina.novacore.world.level.block.BlockDefinition;
-import novamachina.novacore.world.level.block.BlockEntityTypeDefinition;
+import novamachina.novacore.world.level.block.entity.BlockEntityTypeDefinition;
+import novamachina.novacore.world.level.block.entity.IBlockEntityTypeFactory;
 
 public class BlockEntityTypeRegistry
     extends AbstractRegistry<BlockEntityTypeDefinition<? extends BlockEntity>> {
-  public BlockEntityTypeRegistry(String modId) {
+  private final IBlockEntityTypeFactory blockEntityTypeFactory;
+
+  public BlockEntityTypeRegistry(String modId, IServiceProvider serviceProvider) {
     super(modId);
+    this.blockEntityTypeFactory = serviceProvider.blockEntityTypeFactory();
   }
 
   @SafeVarargs
@@ -31,7 +36,7 @@ public class BlockEntityTypeRegistry
     AtomicReference<BlockEntityType<T>> typeHolder = new AtomicReference<>();
     BlockEntityType.BlockEntitySupplier<T> supplier =
         (blockPos, blockState) -> factory.create(typeHolder.get(), blockPos, blockState);
-    var type = BlockEntityType.Builder.of(supplier, blocks).build(null);
+    var type = blockEntityTypeFactory.createBlockEntityType(supplier, blocks);
     typeHolder.set(type);
 
     BlockEntityTypeDefinition<T> definition = new BlockEntityTypeDefinition<>(id, type);
