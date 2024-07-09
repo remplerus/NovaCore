@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [NeoForged Semantic Versioning](https://docs.neoforged.net/docs/gettingstarted/versioning).
 
+## [3.0.0](https://github.com/NovaMachina-Mods/NovaCore/compare/v2.0.0...v3.0.0) - 2024-07-09
+
+### Added
+- `IServiceProvider` to work more towards framework-agnostic library
+- Factory classes for `BlockItem`, `Block`, and `BlockEntityType`
+- Orrientable blockstate functions for data generation
+- Menu and Screen support
+- Unit testing for some registries
+
+### Changed
+- Updated to NeoForge 21.0.40-beta
+- Move NeoForge Registry classes to `novamachina.novacore.bootstrap.core.registries`
+-
+### Removed
+- `BlockBuilder` class. Use `BlockBehavior.Properties` and factory functions from `BlockRegistry`
+
 ## [2.0.0](https://github.com/NovaMachina-Mods/NovaCore/compare/v1.0.0...v2.0.0) - 2024-03-14
 
 ### Added
