@@ -16,7 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Changed
 - Updated to NeoForge 21.0.40-beta
 - Move NeoForge Registry classes to `novamachina.novacore.bootstrap.core.registries`
--
+
 ### Removed
 - `BlockBuilder` class. Use `BlockBehavior.Properties` and factory functions from `BlockRegistry`
 
