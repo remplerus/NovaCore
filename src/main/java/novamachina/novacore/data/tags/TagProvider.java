@@ -147,4 +147,8 @@ public abstract class TagProvider implements DataProvider {
       tagBuilder.add(fluid.getStillFluid(), fluid.getFlowingFluid());
     }
   }
+
+  protected void addToTag(TagKey<Item> parentTag, TagKey<Item>... childTags) {
+    getItemBuilder(parentTag).add(childTags);
+  }
 }

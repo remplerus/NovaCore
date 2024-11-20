@@ -1,14 +1,15 @@
 package novamachina.novacore.core.registries;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
 import novamachina.novacore.world.inventory.MenuTypeDefinition;
 
-public class MenuTypeRegistry extends AbstractRegistry<MenuTypeDefinition<?>> {
+public class MenuTypeRegistry extends AbstractRegistry<MenuTypeDefinition<?>, MenuType<?>> {
 
   public MenuTypeRegistry(String modId) {
-    super(modId);
+    super(modId, Registries.MENU);
   }
 
   public <T extends AbstractContainerMenu> MenuTypeDefinition<T> menuType(

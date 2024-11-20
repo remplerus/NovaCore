@@ -1,6 +1,7 @@
 package novamachina.novacore.world.item;
 
 import java.util.Objects;
+import javax.annotation.Nonnull;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -21,6 +22,7 @@ public class ItemDefinition<T extends Item> implements ItemLike {
   }
 
   @Override
+  @Nonnull
   public T asItem() {
     return item;
   }
@@ -29,8 +31,8 @@ public class ItemDefinition<T extends Item> implements ItemLike {
     return new ItemStack(item, 1);
   }
 
-  public ItemStack itemStack(int stacksize) {
-    return new ItemStack(item, stacksize);
+  public ItemStack itemStack(int stackSize) {
+    return new ItemStack(item, stackSize);
   }
 
   public ResourceLocation getId() {

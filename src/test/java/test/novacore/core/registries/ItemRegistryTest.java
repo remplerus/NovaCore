@@ -35,7 +35,11 @@ class ItemRegistryTest {
             ItemDefinition.ItemType.CUSTOM);
     ItemDefinition<Item> actual =
         classUnderTest.item(
-            "Test Item", "test_item", () -> mockItem, ItemDefinition.ItemType.CUSTOM);
+            "Test Item",
+            "test_item",
+            new Item.Properties(),
+            Item::new,
+            ItemDefinition.ItemType.CUSTOM);
 
     assertEquals(expected.asItem(), actual.asItem());
     assertEquals(expected.getId(), actual.getId());

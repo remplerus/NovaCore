@@ -30,6 +30,6 @@ class SoundEventRegistryTest {
 
     SoundEvent actual = classUnderTest.soundEvent("sound_event");
 
-    assertEquals(expected.getLocation(), actual.getLocation());
+    assertEquals(expected.location(), actual.location());
   }
 }

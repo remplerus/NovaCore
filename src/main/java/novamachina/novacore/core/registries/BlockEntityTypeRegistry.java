@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReference;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -15,11 +16,11 @@ import novamachina.novacore.world.level.block.entity.BlockEntityTypeDefinition;
 import novamachina.novacore.world.level.block.entity.IBlockEntityTypeFactory;
 
 public class BlockEntityTypeRegistry
-    extends AbstractRegistry<BlockEntityTypeDefinition<? extends BlockEntity>> {
+    extends AbstractRegistry<BlockEntityTypeDefinition<? extends BlockEntity>, BlockEntityType<?>> {
   private final IBlockEntityTypeFactory blockEntityTypeFactory;
 
   public BlockEntityTypeRegistry(String modId, IServiceProvider serviceProvider) {
-    super(modId);
+    super(modId, Registries.BLOCK_ENTITY_TYPE);
     this.blockEntityTypeFactory = serviceProvider.blockEntityTypeFactory();
   }
 

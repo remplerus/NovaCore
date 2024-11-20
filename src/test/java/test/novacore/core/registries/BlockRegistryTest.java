@@ -2,8 +2,6 @@ package test.novacore.core.registries;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import novamachina.novacore.bootstrap.world.level.block.BlockFactory;
@@ -54,8 +52,7 @@ public class BlockRegistryTest {
             mockBlockItem);
 
     BlockDefinition<Block> actual =
-        classUnderTest.block(
-            "Test Block", "testblock", () -> blockFactory.block(BlockBehaviour.Properties.of()));
+        classUnderTest.block("Test Block", "testblock", BlockBehaviour.Properties.of());
 
     Assertions.assertEquals(expected.block(), actual.block());
     Assertions.assertEquals(expected.asItem(), actual.asItem());
@@ -84,44 +81,12 @@ public class BlockRegistryTest {
         classUnderTest.block(
             "Test Block",
             "testblock",
-            () -> blockFactory.block(BlockBehaviour.Properties.of()),
+            BlockBehaviour.Properties.of(),
             ItemDefinition.ItemType.CUSTOM);
 
     Assertions.assertEquals(expected.block(), returnValue.block());
     Assertions.assertEquals(expected.asItem(), returnValue.asItem());
     Assertions.assertEquals(expected.getId(), returnValue.getId());
     Assertions.assertEquals(expected.getType(), returnValue.getType());
-  }
-
-  @Test
-  void burnableBlock() {
-    Block mockBlock = Mockito.mock(Block.class);
-    BlockItem mockBlockItem = Mockito.mock(BlockItem.class);
-    BlockFactory blockFactory = Mockito.mock(BlockFactory.class);
-    Item mockItem = Mockito.mock(Item.class);
-
-    Mockito.when(mockBlockItem.getBurnTime(Mockito.any(), Mockito.any())).thenReturn(400);
-    Mockito.when(blockItemFactory.burnableBlockItem(Mockito.any(), Mockito.any(), Mockito.anyInt()))
-        .thenReturn(mockBlockItem);
-    Mockito.when(blockFactory.block(Mockito.any())).thenReturn(mockBlock);
-    Mockito.when(mockBlockItem.asItem()).thenReturn(mockItem);
-
-    BlockDefinition<Block> expected =
-        new BlockDefinition<>(
-            "Test Block",
-            ResourceLocation.fromNamespaceAndPath("unittest", "testblock"),
-            mockBlock,
-            mockBlockItem);
-
-    BlockDefinition<Block> returnValue =
-        classUnderTest.burnableBlock(
-            "Test Block", "testblock", () -> blockFactory.block(BlockBehaviour.Properties.of()));
-
-    Assertions.assertEquals(expected.block(), returnValue.block());
-    Assertions.assertEquals(expected.asItem(), returnValue.asItem());
-    Assertions.assertEquals(expected.getId(), returnValue.getId());
-    Assertions.assertEquals(
-        expected.asItem().getBurnTime(expected.itemStack(), RecipeType.SMELTING),
-        returnValue.asItem().getBurnTime(expected.itemStack(), RecipeType.SMELTING));
   }
 }
