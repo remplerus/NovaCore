@@ -9,6 +9,6 @@ public class BlockEntityTypeFactory implements IBlockEntityTypeFactory {
   @Override
   public <T extends BlockEntity> BlockEntityType<T> createBlockEntityType(
       BlockEntityType.BlockEntitySupplier<T> supplier, Block[] blocks) {
-    return BlockEntityType.Builder.of(supplier, blocks).build(null);
+    return new BlockEntityType<T>(supplier, blocks);
   }
 }

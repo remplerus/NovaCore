@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.loot.LootModifier;
 import novamachina.novacore.common.loot.modifier.LootModifierDefinition;
 import novamachina.novacore.core.registries.LootModifierRegistry;
@@ -29,22 +28,14 @@ class LootModifierRegistryTest {
 
   @Test
   void create() {
-    LootItemCondition mockCondition = Mockito.mock(LootItemCondition.class);
-    LootItemCondition[] mockConditions = new LootItemCondition[] {mockCondition};
     MapCodec<LootModifier> mockCodec = Mockito.mock(MapCodec.class);
     LootModifierDefinition<LootModifier> expected =
         new LootModifierDefinition<>(
-            ResourceLocation.fromNamespaceAndPath("unittest", "loot_modifier"),
-            mockConditions,
-            mockCodec,
-            (conditions) -> null);
+            ResourceLocation.fromNamespaceAndPath("unittest", "loot_modifier"), mockCodec);
 
-    LootModifierDefinition<LootModifier> actual =
-        classUnderTest.create("loot_modifier", mockConditions, mockCodec, (conditions) -> null);
+    LootModifierDefinition<LootModifier> actual = classUnderTest.create("loot_modifier", mockCodec);
 
     assertEquals(expected.getId(), actual.getId());
-    assertEquals(expected.getConditions(), actual.getConditions());
-    assertEquals(expected.getModifier(), actual.getModifier());
     assertEquals(expected.getCodec(), actual.getCodec());
   }
 }

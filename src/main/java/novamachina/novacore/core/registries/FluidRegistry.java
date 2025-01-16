@@ -1,16 +1,18 @@
 package novamachina.novacore.core.registries;
 
 import java.util.function.Supplier;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.Fluid;
 import novamachina.novacore.world.item.ItemDefinition;
 import novamachina.novacore.world.level.block.BlockDefinition;
 import novamachina.novacore.world.level.material.FluidDefinition;
 
-public class FluidRegistry extends AbstractRegistry<FluidDefinition<?, ?, ?>> {
+public class FluidRegistry extends AbstractRegistry<FluidDefinition<?, ?, ?>, Fluid> {
   public FluidRegistry(String modId) {
-    super(modId);
+    super(modId, Registries.FLUID);
   }
 
   public <

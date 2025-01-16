@@ -5,7 +5,7 @@ license="CC BY-NC-SA 4.0"
 
 [[mods]]
     modId="novacore"
-    logoFile="logo.png"
+    logoFile="logo-new.png"
     version="3.0.0"
     displayName="NovaCore"
     updateJSONURL="https://api.modrinth.com/updates/engHtMVe/forge_updates.json"
@@ -15,14 +15,14 @@ license="CC BY-NC-SA 4.0"
 [[dependencies.novacore]]
     modId="neoforge"
     type="required"
-    versionRange="[21.0.0-beta,22)"
+    versionRange="[21.4.20-beta,22)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.novacore]]
     modId="minecraft"
     type="required"
-    versionRange="[1.21,1.21.1)"
+    versionRange="[1.21.4,1.22)"
     ordering="NONE"
     side="BOTH"
 

@@ -1,13 +1,11 @@
 package novamachina.novacore.world.level.material;
 
 import java.util.Objects;
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.material.FlowingFluid;
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.fluids.FluidType;
 import novamachina.novacore.world.item.ItemDefinition;
 import novamachina.novacore.world.level.block.BlockDefinition;
@@ -47,23 +45,7 @@ public class FluidDefinition<
   }
 
   private FluidType createFluidType() {
-    return new FluidType(FluidType.Properties.create()) {
-      @Override
-      public void initializeClient(Consumer<IClientFluidTypeExtensions> consumer) {
-        consumer.accept(
-            new IClientFluidTypeExtensions() {
-              @Override
-              public ResourceLocation getStillTexture() {
-                return getTexture();
-              }
-
-              @Override
-              public ResourceLocation getFlowingTexture() {
-                return getFlowTexture();
-              }
-            });
-      }
-    };
+    return new FluidType(FluidType.Properties.create());
   }
 
   public ResourceLocation getId() {
