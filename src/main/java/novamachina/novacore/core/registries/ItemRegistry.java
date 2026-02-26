@@ -19,7 +19,6 @@ public class ItemRegistry extends AbstractRegistry<ItemDefinition<? extends Item
       Item.Properties properties,
       Function<Item.Properties, T> itemSupplier,
       ItemDefinition.ItemType type) {
-    properties = properties.setId(key(shortId));
     T item = itemSupplier.apply(properties);
     ItemDefinition<T> definition = new ItemDefinition<>(englishName, id(shortId), item, type);
 
@@ -34,7 +33,6 @@ public class ItemRegistry extends AbstractRegistry<ItemDefinition<? extends Item
       Item.Properties properties,
       BiFunction<Fluid, Item.Properties, BucketItem> itemSupplier,
       ItemDefinition.ItemType type) {
-    properties = properties.setId(key(shortId));
     BucketItem item = itemSupplier.apply(fluid, properties);
     ItemDefinition<BucketItem> definition =
         new ItemDefinition<>(englishName, id(shortId), item, type);

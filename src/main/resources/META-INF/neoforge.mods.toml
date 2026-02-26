@@ -15,14 +15,14 @@ license="CC BY-NC-SA 4.0"
 [[dependencies.novacore]]
     modId="neoforge"
     type="required"
-    versionRange="[21.4.20-beta,22)"
+    versionRange="[21.1,21.5)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.novacore]]
     modId="minecraft"
     type="required"
-    versionRange="[1.21.4,1.22)"
+    versionRange="[1.21.1,1.21.5)"
     ordering="NONE"
     side="BOTH"
 

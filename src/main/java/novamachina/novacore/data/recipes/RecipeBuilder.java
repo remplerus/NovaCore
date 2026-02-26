@@ -6,6 +6,7 @@ import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import novamachina.novacore.world.item.crafting.AbstractRecipe;
@@ -18,18 +19,13 @@ public abstract class RecipeBuilder<T extends AbstractRecipe> {
     this.serializer = serializer;
   }
 
-  public void build(RecipeOutput consumer, ResourceKey<Recipe<?>> key) {
-    validate(key);
-    Advancement.Builder advancementBuilder =
-        consumer
-            .advancement()
-            .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(key))
-            .rewards(AdvancementRewards.Builder.recipe(key))
-            .requirements(AdvancementRequirements.Strategy.OR);
-    consumer.accept(key, getRecipe(key), advancementBuilder.build(key.location()));
+  public void build(RecipeOutput consumer, ResourceLocation id) {
+    validate(id);
+    Advancement.Builder advancementBuilder = consumer.advancement().addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id)).rewards(AdvancementRewards.Builder.recipe(id)).requirements(AdvancementRequirements.Strategy.OR);
+    consumer.accept(id, this.getRecipe(id), advancementBuilder.build(id));
   }
 
-  protected abstract T getRecipe(ResourceKey<Recipe<?>> id);
+  protected abstract T getRecipe(ResourceLocation id);
 
-  protected void validate(ResourceKey<Recipe<?>> id) {}
+  protected void validate(ResourceLocation id) {}
 }

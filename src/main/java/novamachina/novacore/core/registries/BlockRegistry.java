@@ -33,7 +33,6 @@ public class BlockRegistry extends AbstractRegistry<BlockDefinition<? extends Bl
       String shortId,
       BlockBehaviour.Properties properties,
       Function<BlockBehaviour.Properties, T> blockSupplier) {
-    properties = properties.setId(key(shortId));
     T block = blockSupplier.apply(properties);
     return blockInternal(englishName, shortId, block);
   }
@@ -44,14 +43,13 @@ public class BlockRegistry extends AbstractRegistry<BlockDefinition<? extends Bl
       BlockBehaviour.Properties properties,
       Function<BlockBehaviour.Properties, T> blockSupplier,
       ItemDefinition.ItemType type) {
-    properties = properties.setId(key(shortId));
     T block = blockSupplier.apply(properties);
     return blockInternal(englishName, shortId, block, type);
   }
 
   public <T extends Block> BlockDefinition<T> block(
       String englishName, String shortId, BlockBehaviour.Properties properties) {
-    T block = blockFactory.block(properties.setId(key(shortId)));
+    T block = blockFactory.block(properties);
     return blockInternal(englishName, shortId, block);
   }
 
@@ -60,13 +58,13 @@ public class BlockRegistry extends AbstractRegistry<BlockDefinition<? extends Bl
       String shortId,
       BlockBehaviour.Properties properties,
       ItemDefinition.ItemType type) {
-    T block = blockFactory.block(properties.setId(key(shortId)));
+    T block = blockFactory.block(properties);
     return blockInternal(englishName, shortId, block, type);
   }
 
   public <T extends FallingBlock> BlockDefinition<T> fallingBlock(
       String englishName, String shortId, BlockBehaviour.Properties properties) {
-    T block = blockFactory.fallingBlock(properties.setId(key(shortId)));
+    T block = blockFactory.fallingBlock(properties);
     return blockInternal(englishName, shortId, block);
   }
 
@@ -76,21 +74,21 @@ public class BlockRegistry extends AbstractRegistry<BlockDefinition<? extends Bl
       BlockBehaviour.Properties properties,
       FlowingFluid fluid,
       ItemDefinition.ItemType type) {
-    T block = blockFactory.liquidBlock(properties.setId(key(shortId)), fluid);
+    T block = blockFactory.liquidBlock(properties, fluid);
     return blockInternal(englishName, shortId, block, type);
   }
 
   private <T extends Block> BlockDefinition<T> blockInternal(
       String englishName, String shortId, T block) {
     BlockItem item =
-        blockItemFactory.blockItem(block, new Item.Properties().setId(itemKey(shortId)));
+        blockItemFactory.blockItem(block, new Item.Properties());
     return blockDefinition(englishName, id(shortId), block, item);
   }
 
   private <T extends Block> BlockDefinition<T> blockInternal(
       String englishName, String shortId, T block, ItemDefinition.ItemType type) {
     BlockItem item =
-        blockItemFactory.blockItem(block, new Item.Properties().setId(itemKey(shortId)));
+        blockItemFactory.blockItem(block, new Item.Properties());
     return blockDefinition(englishName, id(shortId), block, item, type);
   }
 
@@ -99,10 +97,9 @@ public class BlockRegistry extends AbstractRegistry<BlockDefinition<? extends Bl
       String shortId,
       BlockBehaviour.Properties properties,
       Function<BlockBehaviour.Properties, T> blockSupplier) {
-    properties = properties.setId(key(shortId));
     T block = blockSupplier.apply(properties);
     BlockItem item =
-        blockItemFactory.blockItem(block, new Item.Properties().setId(itemKey(shortId)));
+        blockItemFactory.blockItem(block, new Item.Properties());
     return blockDefinition(englishName, id(shortId), block, item);
   }
 

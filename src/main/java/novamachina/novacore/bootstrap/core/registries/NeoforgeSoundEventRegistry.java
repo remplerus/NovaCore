@@ -8,6 +8,6 @@ import novamachina.novacore.core.IRegistry;
 public class NeoforgeSoundEventRegistry implements IRegistry<SoundEvent> {
 
   public void register(SoundEvent entry) {
-    Registry.register(BuiltInRegistries.SOUND_EVENT, entry.location(), entry);
+    Registry.register(BuiltInRegistries.SOUND_EVENT, entry.getLocation(), entry);
   }
 }

@@ -3,6 +3,8 @@ package novamachina.novacore.util;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.slf4j.Logger;
 
+import java.util.Arrays;
+
 public class IngredientUtils {
 
   private static final Logger log = org.slf4j.LoggerFactory.getLogger(IngredientUtils.class);
@@ -17,11 +19,6 @@ public class IngredientUtils {
    * @return true if test is a subset of source, false otherwise
    */
   public static boolean isIngredientIn(Ingredient test, Ingredient source) {
-    //    for (Holder<Item> stack : test.items()) {
-    //      if (source.test(new ItemStack(stack))) {
-    //        return true;
-    //      }
-    //    }
-    return false;
+    return Arrays.stream(test.getItems()).anyMatch(stack -> source.test(stack));
   }
 }

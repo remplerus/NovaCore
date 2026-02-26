@@ -1,64 +1,167 @@
 plugins {
     id 'java-library'
-    id 'eclipse'
-    id 'idea'
     id 'maven-publish'
-    id "com.modrinth.minotaur" version "2.+"
-    id "com.matthewprenger.cursegradle" version "1.4.0"
-    id 'net.neoforged.gradle.userdev' version "7.0.171"
-    id 'com.diffplug.spotless' version '6.23.3'
-    id 'org.sonarqube' version '4.4.1.3373'
-    id "io.freefair.lombok" version "8.11"
+    id 'net.neoforged.gradle.userdev' version '7.0.185'
 }
 
-if (project.file('../gradletools.gradle').exists()) {
-    apply from: '../gradletools.gradle'
-} else {
-    apply from: 'https://raw.githubusercontent.com/NovaMachina-Mods/MultiWorkspace/1.21/gradletools.gradle'
+tasks.named('wrapper', Wrapper).configure {
+    distributionType = Wrapper.DistributionType.BIN
 }
 
-def basicVersion = "${project.mod_version}-build." + ext.getBuildNumber()
-version = "${project.minecraft_version}-${basicVersion}" + (basicVersion.endsWith("SNAPSHOT") ?  '' : (project.release_type != 'release' ? "-${project.release_type}" : ''))
-group = String.format("%s.%s",project.mod_group_id, project.mod_id)
+version = mod_version
+group = mod_group_id
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+base {
+    archivesName = mod_id + "-" + mc_version.substring(2)
+}
 
-sourceSetConfig()
-repos()
-at()
-runConfigurations()
-jars()
-ext.processResources([])
+java.toolchain.languageVersion = JavaLanguageVersion.of(21) // Need this here so eclipse task generates correctly.
+
+runs {
+    configureEach {
+        systemProperty 'forge.logging.markers', 'REGISTRIES'
+        systemProperty 'forge.logging.console.level', 'debug'
+
+        modSource project.sourceSets.main
+    }
+
+    client {
+        systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+    }
+
+    server {
+        systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        programArgument '--nogui'
+    }
+
+    data {
+        programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
+}
+
+repositories {
+    maven {
+        name 'jei'
+        url 'https://maven.blamejared.com'
+        content {
+            includeGroup 'mezz.jei'
+        }
+    }
+    maven {
+        name 'REI'
+        url "https://maven.shedaniel.me"
+        content {
+            includeGroup 'me.shedaniel'
+            includeGroup 'me.shedaniel.cloth'
+            includeGroup 'dev.architectury'
+        }
+    }
+
+    maven {
+        name 'NovaMachina Mods - Release'
+        url 'https://dl.cloudsmith.io/public/novamachina-mods/release/maven/'
+        content {
+            includeGroup 'novamachina.novacore'
+            includeGroup 'novamachina.exnihilosequentia'
+            includeGroup 'novamachina.exnihilothermal'
+            includeGroup 'novamachina.exnihilomekanism'
+            includeGroup 'novamachina.exnihiloae'
+            includeGroup 'novamachina.exnihilotinkers'
+        }
+        mavenContent {
+            releasesOnly()
+        }
+    }
+    maven {
+        name 'NovaMachina Mods - Snapshot'
+        url 'https://dl.cloudsmith.io/public/novamachina-mods/snapshot/maven/'
+        content {
+            includeGroup 'novamachina.novacore'
+            includeGroup 'novamachina.exnihilosequentia'
+            includeGroup 'novamachina.exnihilothermal'
+            includeGroup 'novamachina.exnihilomekanism'
+            includeGroup 'novamachina.exnihiloae'
+            includeGroup 'novamachina.exnihilotinkers'
+        }
+        mavenContent {
+            snapshotsOnly()
+        }
+    }
+
+    maven {
+        name 'cursemaven'
+        url 'https://cursemaven.com'
+        content {
+            includeGroup 'curse.maven'
+        }
+    }
+}
 
 dependencies {
-    mc()
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.2'
-    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.10.2'
-    testImplementation 'org.mockito:mockito-core:3.+'
+    implementation "net.neoforged:neoforge:${neo_version}"
+
+    //implementation fg.deobf("novamachina.exnihilosequentia:exnihilosequentia:${minecraft_version}-${exnihilo_version}")
+
+    //implementation fg.deobf("novamachina.novacore:novacore:${minecraft_version}-${nova_version}")
+    //localRuntime "me.shedaniel:RoughlyEnoughItems-neoforge:15.+"
+    //localRuntime "me.shedaniel.cloth:cloth-config-neoforge:14.+"
+    //localRuntime "dev.architectury:architectury-neoforge:12.+"
 }
 
-ext.publish()
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [
+            minecraft_version      : mc_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+            mod_authors            : mod_authors,
+            mod_description        : mod_description
+    ]
+    inputs.properties replaceProperties
 
-if(!System.getenv('CI')) {
-    apply plugin: com.diffplug.gradle.spotless.SpotlessPlugin
-    spotlessConfig()
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand replaceProperties
+    }
 }
 
-localGitHook()
-
-cfdeps([], [], [])
-modrinthConfig([], [], [])
-
-project.tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8'
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url "file://${project.projectDir}/repo"
+        }
+        maven {
+            name = "RemplersRepo"
+            url = "https://maven.rempler.com/releases/"
+            credentials(PasswordCredentials)
+            authentication {
+                basic(BasicAuthentication)
+            }
+        }
+    }
 }
 
-ideaConfig()
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
 
-sonar {
-    properties {
-        property "sonar.projectKey", "NovaMachina-Mods_NovaCore"
-        property "sonar.organization", "novamachina-mods"
-        property "sonar.host.url", "https://sonarcloud.io"
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
     }
 }
